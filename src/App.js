@@ -9,6 +9,8 @@ function App() {
     <div className="App">
       <div className="qr-wrap">
         <QrReader
+        //  facingMode="environment" // Use the back camera
+         constraints={{ facingMode: 'environment' }}
           onResult={(result, error) => {
             if (!!result) {
               setData(result?.text);
@@ -18,7 +20,7 @@ function App() {
               console.info(error);
             }
           }}
-          style={{ width: "300px", heigth: "140px" }}
+          style={{ width: "300px", heigth: "340px" }}
         />
       </div>
       <p>{data}</p>
