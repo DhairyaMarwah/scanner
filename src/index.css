@@ -39,6 +39,10 @@ body {
   text-align: center;
   margin: 0 auto; margin-top: 1rem;
 }
+.output-btn{
+  cursor: pointer;
+  width: 200px;
+}
 .output h1{
   font-weight: 600;
 font-size: 20.44px;
