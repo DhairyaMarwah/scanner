@@ -10,24 +10,13 @@ function App() {
 
   const verifyStudent = async (studentId) => {
     try {
-      const response = await fetch(`https://farewell.jayantkhanna.in/verifyStudent?student_id=${studentId}`);
-      const responseData = await response.json();
-      console.log(responseData);
+      const response = await fetch(`https://farewell.jayantkhanna.in/verifyStudent?student_id=${studentId}`); 
+      const responseData = await response.json(); 
+      console.log(responseData); 
       setData2(responseData);
     } catch (error) {
       console.error("Error occurred while verifying student", error);
     }
-  };
-
-  const handleScan = (result) => {
-    if (result) {
-      setData(result);
-      verifyStudent(result);
-    }
-  };
-
-  const handleError = (error) => {
-    console.error(error);
   };
   return (
     <div className="App">
@@ -37,15 +26,25 @@ function App() {
       <div className="qr-wrap">
         <QrReader
           constraints={{ facingMode: "environment" }}
-          onScan={handleScan}
-          onError={handleError}
-          style={{ width: "100%", height: "100%" }}
+          onResult={(result, error) => {
+            if (!!result) {
+              setData(result?.text);
+              verifyStudent(result?.text)
+            }
+
+            if (!!error) {
+              console.info(error);
+            }
+          }}
+          style={{ width: "100%", heigth: "100%" }}
         />
       </div>
       <div className="output">
         <h1>{data}</h1>
         <p>{data2}</p>
       </div>
+      {/* <p>{data}</p> */}
+
     </div>
   );
 }
